@@ -1,0 +1,16 @@
+<h1> Todo items </h1>
+<h2> Todo </h2>
+<% @todo.each do |t| %>
+	<p>
+		<strong><%= t.name %></strong>
+		<%= link_to 'Mark as done', todo_path(t), :method => :put %>
+	</p>
+<%end%>
+<% @tododone.each do |t| %>
+	<p>
+		<strong><%= t.name %></strong>
+		<%= link_to 'Remove', todo_path(t), :confirm => 'Are you sure to remove this item?', :method => :delete %>
+	</p>
+<%end%>
+
+<%= link_to 'Add new Todo', new_todo_path %>

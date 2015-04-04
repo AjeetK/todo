@@ -1,0 +1,8 @@
+<h1> Add new Todo item </h1>
+<%= form_for @todo, :url => todos_path(@todo) do |f| %>
+	<%= f.label :name %>
+	<%= f.text_field :name %>
+	<%= f.hidden_field :done, :value => false %>
+	<%= f.hidden_field :user_id, :value => current_user.id %>
+	<%= f.submit "Add" %>
+<%end%>
