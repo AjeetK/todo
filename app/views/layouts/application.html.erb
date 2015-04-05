@@ -6,16 +6,28 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
-<body>
-
-<% if user_signed_in? %>
-	you are currently signed in as <%= current_user.email %>, Not you?
-	<%= link_to "Sign Out", destroy_user_session_path, :method => :delete %>
-<% else %>
-	<%= link_to "Sign Up", new_user_registration_path%> or <%= link_to "Sing In", new_user_session_path %>
-<%end%>
-
+<body bgcolor="black">
+<div class="navbar navbar-default">
+	<div class="navbar-header">
+		<a href="#" class="navbar-brand">Wan-to-do</a>
+	</div>
+	<div class="navbar-text pull-right">
+		<% if user_signed_in? %>
+			Hello <%= current_user.email %> | Not you?
+			<%= link_to "Sign Out", destroy_user_session_path, :method => :delete %>
+		<% else %>
+			<%= link_to "Sign Up", new_user_registration_path%> or <%= link_to "Sing In", new_user_session_path %>
+		<%end%>
+	</div><!-- end of pull-right -->
+</div><!-- end of navbar -->
 <%= yield %>
+
+<div class="container">
+	<footer>
+		<hr>
+		<p>&#169; <a href="">Ajeet Khan</a></p>
+	</footer>
+</div><!-- end of container -->
 
 </body>
 </html>

@@ -3,7 +3,7 @@ class TodosController < ApplicationController
 		#@user_todo = User.find(:all, :conditions => ['user_id = ?', current_user.id])
 		#@todo = @user_todo.tasks.find_all_by_done(false)
 		#@todo = Task.find(:all, :conditions => ['user_id = ? AND done = ?', current_user.id, false])
-		@todo = Task.where(done: false, user_id: current_user.id)
+		@todo = Task.where(done: false, user_id: current_user.id).order('priority')
 		@tododone = Task.where(done: true, user_id:current_user.id)
 		
 	end
@@ -13,7 +13,7 @@ class TodosController < ApplicationController
 	end
 
 	def todo_params
-		params.require(:task).permit(:name, :done, :user_id)
+		params.require(:task).permit(:name, :done, :user_id, :priority)
 		
 	end
 
@@ -40,7 +40,7 @@ class TodosController < ApplicationController
 	def destroy
 		@todo = Task.find(params[:id])
 		@todo.destroy
-		redirect_to todo_index_path, :notice => "Your todo was deleted"
+		redirect_to root_path, :notice => "Your todo was deleted"
 		
 	end
 end

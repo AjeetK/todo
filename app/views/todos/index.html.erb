@@ -1,16 +1,54 @@
-<h1> Todo items </h1>
-<h2> Todo </h2>
-<% @todo.each do |t| %>
-	<p>
-		<strong><%= t.name %></strong>
-		<%= link_to 'Mark as done', todo_path(t), :method => :put %>
-	</p>
-<%end%>
-<% @tododone.each do |t| %>
-	<p>
-		<strong><%= t.name %></strong>
-		<%= link_to 'Remove', todo_path(t), :confirm => 'Are you sure to remove this item?', :method => :delete %>
-	</p>
-<%end%>
+<div class="container">
+	<div class="panel panel-primary">
+		<div class="panel-heading panel-title">
+			 Current To dos 
+			<%= link_to '<i class="glyphicon glyphicon-plus pull-right"> Add New</i>'.html_safe, new_todo_path %>
+		</div>
+		<div class="panel-body">
+			<div class="table-responsive">
+				<table class="table">
+					<tr>
+						<th>To do</th>
+						<th>Priority</th>
+						<th>Done?</th>
+						<th>Delete?</th>
+					</tr>
+					<% @todo.each do |t| %>
+						<tr>
+							<td><strong><%= t.name %></strong></td>
+							<td><strong><%= t.priority %></strong></td>
+							<td><%= link_to 'Mark as done'.html_safe, todo_path(t), :method => :put %></td>
+							<td><%= link_to 'Remove', todo_path(t.id), :confirm => 'Are you sure to remove this item?', :method => :delete %></td>
+						</tr>
+					<%end%>
+				</table>
+			</div><!-- end of table-responsive -->
+		</div><!-- end of panel-body -->
+	</div><!-- end of panel panel-primary -->
 
-<%= link_to 'Add new Todo', new_todo_path %>
+
+	<div class="panel panel-primary">
+		<div class="panel-heading panel-title">
+			 Done 
+		</div>
+		<div class="panel-body">
+			<div class="table-responsive">
+				<table class="table">
+					<tr>
+						<th>To do</th>
+						<th>Priority</th>
+						<th>Delete?</th>
+					</tr>
+					<% @tododone.each do |t| %>
+						<tr>
+							<td><strong><%= t.name %></strong></td>
+							<td><strong><%= t.priority %></strong></td>
+							<td><%= link_to 'Remove', todo_path(t), :confirm => 'Are you sure to remove this item?', :method => :delete %></td>
+						</tr>
+					<%end%>
+				</table>
+			</div><!-- end of table-responsive -->
+		</div><!-- end of panel-body -->
+	</div><!-- end of panel panel-primary -->
+
+</div><!-- end of container -->
